@@ -1,11 +1,10 @@
-package amazonapi
+package sso
 
 import (
 	"fmt"
 	"github.com/Centny/gwf/log"
 	"github.com/Centny/gwf/routing"
 	"github.com/Centny/gwf/util"
-	"github.com/dyedu/dyf-sdk/config"
 	"net/http"
 	"net/url"
 	"regexp"
@@ -126,18 +125,5 @@ func NewAuthFilter(authUrl, loginUrl, pre string) *AuthFilter {
 		SsoLoginUrl: loginUrl,
 		Pre:         pre,
 		Options:     []*regexp.Regexp{},
-	}
-}
-
-func CreateOpenAuthSign(method string) string {
-	raw := fmt.Sprintf("appId=%v&appSecret=%v&authMethod=%v&timestamp=%v",
-		config.AppId, config.AppSecret, method, util.Now()+config.TimeDeviation)
-	switch method {
-	case "md5":
-		return util.Md5_b([]byte(raw))
-	case "sha1":
-		return util.Sha1_b([]byte(raw))
-	default:
-		return ""
 	}
 }

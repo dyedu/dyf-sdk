@@ -1,4 +1,4 @@
-package amazonapi
+package sso
 
 import (
 	"fmt"
