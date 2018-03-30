@@ -56,62 +56,70 @@ func TestInitSrvAddr(t *testing.T) {
 	}()
 
 	cfg := util.NewFcfg3()
-	for _, val := range []string{"appraise", "ars", "count", "course", "dms", "extra", "fs", "imsd", "order", "pes2", "recruit", "ucs", "tms"} {
-		key := fmt.Sprintf("%s_PUB_HOST", strings.ToUpper(val))
+	for _, val := range []string{"appraise", "ars", "count", "course", "dms", "extra", "fs", "imsd", "order", "pes2", "recruit", "ucs", "tms", "rcp", "adm"} {
+		key := fmt.Sprintf("public/%s_PUB_HOST", strings.ToUpper(val))
 		cfg.SetVal(key, val)
 	}
 
 	InitSrvAddr(cfg)
-	if AppraiseSrvAddr != "appraise" {
+	if AppraiseSrvAddr != "//appraise" {
 		t.Error("AppraiseSrvAddr error")
 		return
 	}
-	if ArsSrvAddr != "ars" {
+	if ArsSrvAddr != "//ars" {
 		t.Error("ArsSrvAddr error")
 		return
 	}
-	if CountSrvAddr != "count" {
+	if CountSrvAddr != "//count" {
 		t.Error("CountSrvAddr error")
 		return
 	}
-	if CourseSrvAddr != "course" {
+	if CourseSrvAddr != "//course" {
 		t.Error("CourseSrvAddr error")
 		return
 	}
-	if DmsSrvAddr != "dms" {
+	if DmsSrvAddr != "//dms" {
 		t.Error("DmsSrvAddr error")
 		return
 	}
-	if ExtraSrvAddr != "extra" {
+	if ExtraSrvAddr != "//extra" {
 		t.Error("ExtraSrvAddr error")
 		return
 	}
-	if FsSrvAddr != "fs" {
+	if FsSrvAddr != "//fs" {
 		t.Error("FsSrvAddr error")
 		return
 	}
-	if ImsSrvAddr != "imsd" {
+	if ImsSrvAddr != "//imsd" {
 		t.Error("ImsSrvAddr error")
 		return
 	}
-	if OrderSrvAddr != "order" {
+	if OrderSrvAddr != "//order" {
 		t.Error("OrderSrvAddr error")
 		return
 	}
-	if Pes2SrvAddr != "pes2" {
+	if Pes2SrvAddr != "//pes2" {
 		t.Error("Pes2SrvAddr error")
 		return
 	}
-	if RecruitSrvAddr != "recruit" {
+	if RecruitSrvAddr != "//recruit" {
 		t.Error("RecruitSrvAddr error")
 		return
 	}
-	if UcsSrvAddr != "ucs" {
+	if UcsSrvAddr != "//ucs" {
 		t.Error("UcsSrvAddr error")
 		return
 	}
-	if TmsSrvAddr != "tms" {
+	if TmsSrvAddr != "//tms" {
 		t.Error("SrvAddr error")
+		return
+	}
+	if RcpSrvAddr != "//rcp" {
+		t.Error("RcpSrvAddr error")
+		return
+	}
+	if AdmSrvAddr != "//adm" {
+		t.Error("AdmSrvAddr error")
 		return
 	}
 }

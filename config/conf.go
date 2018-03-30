@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"github.com/Centny/gwf/util"
 )
 
@@ -22,6 +23,8 @@ var (
 	RecruitSrvAddr  string
 	UcsSrvAddr      string
 	TmsSrvAddr      string
+	RcpSrvAddr      string
+	AdmSrvAddr      string
 )
 
 func InitOpenAuthConf(appId, appSecret string, timeDeviation int64) {
@@ -45,17 +48,19 @@ func InitSrvAddr(cfg *util.Fcfg) {
 
 	cfg.Print()
 
-	AppraiseSrvAddr = cfg.Val("APPRAISE_PUB_HOST")
-	ArsSrvAddr = cfg.Val("ARS_PUB_HOST")
-	CountSrvAddr = cfg.Val("COUNT_PUB_HOST")
-	CourseSrvAddr = cfg.Val("COURSE_PUB_HOST")
-	DmsSrvAddr = cfg.Val("DMS_PUB_HOST")
-	ExtraSrvAddr = cfg.Val("EXTRA_PUB_HOST")
-	FsSrvAddr = cfg.Val("FS_PUB_HOST")
-	ImsSrvAddr = cfg.Val("IMSD_PUB_HOST")
-	OrderSrvAddr = cfg.Val("ORDER_PUB_HOST")
-	Pes2SrvAddr = cfg.Val("PES2_PUB_HOST")
-	RecruitSrvAddr = cfg.Val("RECRUIT_PUB_HOST")
-	UcsSrvAddr = cfg.Val("UCS_PUB_HOST")
-	TmsSrvAddr = cfg.Val("TMS_PUB_HOST")
+	AppraiseSrvAddr = fmt.Sprintf("%s//%s", cfg.Val("public/PUBLIC_PROTO"), cfg.Val("public/APPRAISE_PUB_HOST"))
+	ArsSrvAddr = fmt.Sprintf("%s//%s", cfg.Val("public/PUBLIC_PROTO"), cfg.Val("public/ARS_PUB_HOST"))
+	CountSrvAddr = fmt.Sprintf("%s//%s", cfg.Val("public/PUBLIC_PROTO"), cfg.Val("public/COUNT_PUB_HOST"))
+	CourseSrvAddr = fmt.Sprintf("%s//%s", cfg.Val("public/PUBLIC_PROTO"), cfg.Val("public/COURSE_PUB_HOST"))
+	DmsSrvAddr = fmt.Sprintf("%s//%s", cfg.Val("public/PUBLIC_PROTO"), cfg.Val("public/DMS_PUB_HOST"))
+	ExtraSrvAddr = fmt.Sprintf("%s//%s", cfg.Val("public/PUBLIC_PROTO"), cfg.Val("public/EXTRA_PUB_HOST"))
+	FsSrvAddr = fmt.Sprintf("%s//%s", cfg.Val("public/PUBLIC_PROTO"), cfg.Val("public/FS_PUB_HOST"))
+	ImsSrvAddr = fmt.Sprintf("%s//%s", cfg.Val("public/PUBLIC_PROTO"), cfg.Val("public/IMSD_PUB_HOST"))
+	OrderSrvAddr = fmt.Sprintf("%s//%s", cfg.Val("public/PUBLIC_PROTO"), cfg.Val("public/ORDER_PUB_HOST"))
+	Pes2SrvAddr = fmt.Sprintf("%s//%s", cfg.Val("public/PUBLIC_PROTO"), cfg.Val("public/PES2_PUB_HOST"))
+	RecruitSrvAddr = fmt.Sprintf("%s//%s", cfg.Val("public/PUBLIC_PROTO"), cfg.Val("public/RECRUIT_PUB_HOST"))
+	UcsSrvAddr = fmt.Sprintf("%s//%s", cfg.Val("public/PUBLIC_PROTO"), cfg.Val("public/UCS_PUB_HOST"))
+	TmsSrvAddr = fmt.Sprintf("%s//%s", cfg.Val("public/PUBLIC_PROTO"), cfg.Val("public/TMS_PUB_HOST"))
+	RcpSrvAddr = fmt.Sprintf("%s//%s", cfg.Val("public/PUBLIC_PROTO"), cfg.Val("public/RCP_PUB_HOST"))
+	AdmSrvAddr = fmt.Sprintf("%s//%s", cfg.Val("public/PUBLIC_PROTO"), cfg.Val("public/ADM_PUB_HOST"))
 }
