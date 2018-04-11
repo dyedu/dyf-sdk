@@ -64,3 +64,10 @@ func InitSrvAddr(cfg *util.Fcfg) {
 	RcpSrvAddr = fmt.Sprintf("%s//%s", cfg.Val("public/PUBLIC_PROTO"), cfg.Val("public/RCP_PUB_HOST"))
 	AdmSrvAddr = fmt.Sprintf("%s//%s", cfg.Val("public/PUBLIC_PROTO"), cfg.Val("public/ADM_PUB_HOST"))
 }
+
+func InitTestSrv() {
+	cfg := util.NewFcfg3()
+	cfg.InitWithUri("http://pb.dev.jxzy.com/dyf_sandbox_conf.properties")
+
+	InitSrvAddr(cfg)
+}
