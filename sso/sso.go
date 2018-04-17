@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/Centny/gwf/log"
 	"github.com/Centny/gwf/routing"
+	"github.com/Centny/gwf/tutil"
 	"github.com/Centny/gwf/util"
 	"net/http"
 	"net/url"
@@ -19,9 +20,11 @@ type AuthFilter struct {
 	M           string //the filter model,C is return the 302 code.
 	Options     []*regexp.Regexp
 	Optioned    bool
+	monitor     *tutil.Monitor
 }
 
 func (a *AuthFilter) SrvHTTP(hs *routing.HTTPSession) routing.HResult {
+	defer a.monitor.Done(a.monitor.Start("dyf_sdk_auth_filter"))
 	turl := TokenReg.ReplaceAllString(hs.R.URL.String(), "")
 	protocol := "http"
 	if hs.R.TLS != nil {
@@ -102,6 +105,13 @@ func (a *AuthFilter) requestAuth(token string) (string, error) {
 	return uid, nil
 }
 
+func (a *AuthFilter) State() (interface{}, error) {
+	if a.monitor == nil {
+		return nil, nil
+	}
+	return a.monitor.State()
+}
+
 /**
 @arg:
 	authUrl		鉴权接口地址
@@ -125,5 +135,6 @@ func NewAuthFilter(authUrl, loginUrl, pre string) *AuthFilter {
 		SsoLoginUrl: loginUrl,
 		Pre:         pre,
 		Options:     []*regexp.Regexp{},
+		monitor:     tutil.NewMonitor(),
 	}
 }
