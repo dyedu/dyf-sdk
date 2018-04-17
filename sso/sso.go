@@ -39,9 +39,14 @@ func (a *AuthFilter) SrvHTTP(hs *routing.HTTPSession) routing.HResult {
 		return a.OnNotLogin(hs, loginUrl)
 	}
 
-	var mid = a.monitor.Start("dyf_sdk_auth_filter")
+	var mid = ""
+	if a.monitor != nil {
+		a.monitor.Start("dyf_sdk_auth_filter")
+	}
 	uid, err := a.requestAuth(token)
-	a.monitor.Done(mid)
+	if a.monitor != nil {
+		a.monitor.Done(mid)
+	}
 	if err != nil {
 		return a.OnNotLogin(hs, loginUrl)
 	}
