@@ -24,7 +24,6 @@ type AuthFilter struct {
 }
 
 func (a *AuthFilter) SrvHTTP(hs *routing.HTTPSession) routing.HResult {
-	defer a.monitor.Done(a.monitor.Start("dyf_sdk_auth_filter"))
 	turl := TokenReg.ReplaceAllString(hs.R.URL.String(), "")
 	protocol := "http"
 	if hs.R.TLS != nil {
@@ -40,7 +39,9 @@ func (a *AuthFilter) SrvHTTP(hs *routing.HTTPSession) routing.HResult {
 		return a.OnNotLogin(hs, loginUrl)
 	}
 
+	var mid = a.monitor.Start("dyf_sdk_auth_filter")
 	uid, err := a.requestAuth(token)
+	a.monitor.Done(mid)
 	if err != nil {
 		return a.OnNotLogin(hs, loginUrl)
 	}
